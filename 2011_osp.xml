@@ -1,5 +1,5 @@
 <editorsettings description="osp" icon="lilypond.png">
-<executable command="/Users/pierre/System/src/osp/baron/tolily-build-desktop/tolily" />
+<executable command="/home/ludi/wrk/osp/baron/tolily/tolily" />
 <imagefile extension=".pdf"/>
 <empty-frame-text>
 ici

@@ -1,57 +1,65 @@
+---Generic Booklet (A4)
+---
+---It is said generic as it will try to determine
+---automatically how to fit the booklet onto A4
+---paper sheets, scaling pages if necessary. 
+---it is well suited for office documents for
+---which you do not care too much about resulting
+---imposition artefacts since it manages to save 
+---paper!
+---
+-- print("Booklet")
+-- We output an A4 booklet
+PageWidth = 595.27559
+PageHeight = 841.88976
 
+print("PageCount",PageCount)
 
-Scale = PageHeight / (4*SourceWidth)
+-- We assume that H > W
+-- Argh, we now can do better since we have "if" ;-)
+-- Scale = PageHeight / (2*SourceWidth)
+if(SourceWidth <= SourceHeight)
+then
+	Scale = PageHeight / (2*SourceWidth)
+	rot = 90
+		xof = SourceHeight
+		yofRA = 0
+		yofRB = SourceWidth
+		yofVA = 0
+		yofVB = SourceWidth
+else
+	Scale = PageHeight / (2*SourceHeight)
+	rot = 0
+		xof = 0;
+		yofRA = 0
+		yofRB = SourceHeight
+		yofVA = SourceHeight
+		yofVB = 0
+end
 
-xof = SourceHeight
-yofRA = 0
-yofRB = SourceWidth
-yofVA = 0
-yofVB = SourceWidth
-
-rot1 = 90;
-rot2 = 270;
-
-tw = (PageHeight / 4) / Scale;
-th = (PageWidth / 2) / Scale;
-pgroup = 16;
 do
-	rest = PageCount % 16
+	rest = PageCount % 4
 	totp = PageCount
 	if rest ~= 0
 		then 
-		totp = totp + ( 16 - rest)
+		totp = totp + ( 4 - rest)
 		end
 	inc = 0
 	count = 0
-	imax = totp/16
+	imax = totp/4
 	while count < imax
 		do
 -- 		We assume that podofoimpose will discard invalid records
 -- 		such as those with source page greater than PageCount
 -- 		print(totp, inc, rot, xof,yofRA, yofRA, yofVA, yofVB)
 -- Recto
-		PushRecord((pgroup*count)+9, (count*2)+1, rot2, 0, tw)
-		PushRecord((pgroup*count)+16, (count*2)+1, rot1, 2*th, 0)
-		PushRecord((pgroup*count)+13, (count*2)+1, rot1, 2*th, 3*tw)
-		PushRecord((pgroup*count)+12, (count*2)+1, rot2, 0, 4*tw)
-		PushRecord((pgroup*count)+1, (count*2)+1, rot1, 2*th, tw)
-		PushRecord((pgroup*count)+8, (count*2)+1, rot2, 0, 2*tw)
-		PushRecord((pgroup*count)+4, (count*2)+1, rot1, 2*th, 2*tw)
-		PushRecord((pgroup*count)+5, (count*2)+1, rot2, 0, 3*tw)
-				
+		PushRecord(totp - inc , inc + 1 , rot, xof , yofRA)
+		PushRecord(inc + 1 , inc + 1 , rot, xof , yofRB)
 -- Verso
-		PushRecord((pgroup*count)+10, (count*2)+2, rot1, 2*th, 0)
-		PushRecord((pgroup*count)+15, (count*2)+2, rot2, 0, tw)
-		PushRecord((pgroup*count)+11, (count*2)+2, rot1, 2*th, 3*tw)
-		PushRecord((pgroup*count)+14, (count*2)+2, rot2, 0, 4*tw)
-		PushRecord((pgroup*count)+7, (count*2)+2, rot1, 2*th, tw)
-		PushRecord((pgroup*count)+2, (count*2)+2, rot2, 0, 2*tw)
-		PushRecord((pgroup*count)+6, (count*2)+2, rot1, 2*th, 2*tw)
-		PushRecord((pgroup*count)+3, (count*2)+2, rot2, 0, 3*tw)
-
+		PushRecord(inc + 2 , inc + 2 , rot, xof , yofVA)
+		PushRecord(totp-(inc + 1) , inc + 2 , rot, xof, yofVB)
 		
 		count = count + 1
-		inc = inc + 8
+		inc = inc + 2
 		end
 end
-

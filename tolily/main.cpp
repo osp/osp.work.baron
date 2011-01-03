@@ -57,10 +57,10 @@ int main(int argc, char *argv[])
 
 	os << "\\version \"2.12.3\"\n";
 	os << "\\paper{\n";
-	os << "	paper-width = 300\\pt\n";
+	os << "	paper-width = 340\\pt\n";
 	os << "	paper-height = 420\\pt\n";
-	os << "	left-margin = 0\n";
-	os << "	right-margin = 0\n";
+	os << "	left-margin = 9\\pt\n";
+	os << "	right-margin = 9\\pt\n";
 	os << "	line-width = 300\\pt\n";
 	os << "	indent = 0\n";
 	os << "	top-margin = 0\n";
