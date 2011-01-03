@@ -3,16 +3,21 @@
 #include <QString>
 #include <QStringList>
 #include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
 #include <QMap>
 #include <QChar>
+#include <QProcess>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
 	QCoreApplication a(argc, argv);
 
 	QString infilePath(a.arguments().at(1));
-	QString outfilePath(a.arguments().at(2));
+	QString outfilePath(QString("blabla.tmpfile%1.ly" ).arg(qrand()));
+//	QFileInfo finfo(infilePath);
+	QString pdfFile(infilePath);
 
 	QFile infile(infilePath);
 	QFile outfile(outfilePath);
@@ -51,12 +56,27 @@ int main(int argc, char *argv[])
 	QTextStream os(&outfile);
 
 	os << "\\version \"2.12.3\"\n";
+	os << "\\paper{\n";
+	os << "	paper-width = 300\\pt\n";
+	os << "	paper-height = 420\\pt\n";
+	os << "	left-margin = 0\n";
+	os << "	right-margin = 0\n";
+	os << "	line-width = 300\\pt\n";
+	os << "	indent = 0\n";
+	os << "	top-margin = 0\n";
+	os << "	page-top-space = 0\n";
+	os << "	head-separation = 0\n";
+	os << "	bottom-margin = 0\n";
+	os << "	}\n";
+
 	os << "{\n";
 	int counter(0);
 	foreach(const QChar& c, s)
 	{
 		if(m.contains(c))
+		{
 			os << m.value(c) << " ";
+		}
 		if(counter == 8)
 		{
 			os << "\n";
@@ -65,7 +85,29 @@ int main(int argc, char *argv[])
 		++counter;
 	}
 	os << "\n}\n";
+	os << "\\addlyrics {\n";
+	os << s ;
+	os << "\n}\n";
+
+	os.flush();
+	outfile.close();
+
+	outfile.open(QIODevice::ReadOnly);
+	qDebug()<<outfile.readAll();
 
 
+	QProcess proc;
+	proc.setProcessChannelMode(QProcess::ForwardedChannels);
+	QStringList pArgs;
+	pArgs << "--verbose"<< "-o" << pdfFile << outfilePath;
+	qDebug()<<"lilypond"<< pArgs.join(" ");
+	proc.start("lilypond", pArgs);
+	if(proc.waitForStarted())
+		qDebug()<< "SUCCESSFULY STARTED!!!!!";
+	if(proc.waitForFinished())
+		qDebug()<< "SUCCESSFULY FINISHED!!!!!";
+
+
+	outfile.remove();
 //	return a.exec();
 }
