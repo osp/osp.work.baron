@@ -1,0 +1,21 @@
+try:
+    import scribus
+except ImportError:
+    print "Unable to import the 'scribus' module. This script will only run within"
+    print "the Python interpreter embedded in Scribus. Try Script->Execute Script."
+    sys.exit(1)
+
+lastName=""
+for p in range(scribus.pageCount()):
+	if(p % 2 != 0):
+		scribus.gotoPage(p)
+		top,left,right,bottom = scribus.getPageNMargins(p)
+		pw, ph = scribus.getPageSize()
+#		print top, left, right, bottom
+		newName = scribus.createText(left, top, pw - (right + left), ph - (bottom + top))
+		if(len(lastName) > 0):
+			try:
+				scribus.linkTextFrames(lastName, newName)
+			except ScribusException:
+				print "CANT LINK", lastName, newName
+		lastName = newName
