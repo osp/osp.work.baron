@@ -1,0 +1,9 @@
+<editorsettings description="convert (ImageMagick)" icon="dot.svg">
+    <executable command="/usr/local/scribus14/share/scribus/editorconfig/convert.sh %file %file.png" />
+	<imagefile extension=".png"/>
+	<empty-frame-text>
+        label:bla
+	</empty-frame-text>
+    <preamble></preamble>
+	<postamble></postamble>
+</editorsettings>
