@@ -6,8 +6,8 @@ except ImportError:
     sys.exit(1)
 
 lastName=""
-for p in range(scribus.pageCount()):
-	if(p % 2 != 0):
+for p in range(1, scribus.pageCount()):
+	if(p % 2 == 0):
 		scribus.gotoPage(p)
 		top,left,right,bottom = scribus.getPageNMargins(p)
 		pw, ph = scribus.getPageSize()
