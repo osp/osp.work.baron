@@ -1,11 +1,3 @@
---- Brochure 8 poses
----
---- In8 provided by Ludi 
----
-
-
-
--- print("PageCount",PageCount);
 
 
 Scale = PageHeight / (4*SourceWidth)
