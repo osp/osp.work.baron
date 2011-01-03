@@ -1,0 +1,11 @@
+<editorsettings description="Bash (.ps output)" icon="dot.svg">
+    <!--<executable command="enscript /mnt/stock/Boulots/osp/PleaseMakeMeDesign/texts/awkward_gestures.mkd -o %file.ps" />-->
+    <executable command="/usr/local/scribus14/share/scribus/editorconfig/bash-ps.sh %file %file.ps" />
+	<imagefile extension=".ps"/>
+	<empty-frame-text>
+        hello world
+	</empty-frame-text>
+	<preamble>
+	</preamble>
+	<postamble></postamble>
+</editorsettings>
