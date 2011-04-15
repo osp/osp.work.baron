@@ -1,0 +1,10 @@
+<editorsettings description="osp" icon="lilypond.png">
+<executable command="/Users/pierre/System/src/osp/baron/tolily-build-desktop/tolily" />
+<imagefile extension=".pdf"/>
+<empty-frame-text>
+ici
+</empty-frame-text>
+<preamble>
+</preamble>
+<postamble></postamble>
+</editorsettings>
