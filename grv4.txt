@@ -1,0 +1,25 @@
+
+
+digraph G {
+node [shape=record]; 
+{
+When ->"I | was -> in | the -> morning | as -> I -> was -> admiring -> the -> beauty -> and -> serenity -> of -> the -> sky 
+I -> observed -> a -> globular -> substance -> in -> the -> air 
+which -> appeared -> to -> be -> about -> the -> size -> of -> a -> twelve->inch -> globe 
+with -> somewhat -> suspended -> from -> it"
+}
+{
+I -> immediately -> took -> up -> my -> largest -> and -> longest -> barrel -> fowling->piece 
+which -> I -> never -> travel -> or -> make -> even -> an -> excursion -> without 
+if -> I -> can -> help -> it  -> I -> charged -> with -> a -> ball 
+and -> fired -> at -> the -> globe 
+but -> to -> no -> purpose 
+the -> object -> being -> at -> too -> great -> a -> distance 
+}
+{
+I -> then -> put -> in -> a -> double -> quantity -> of -> powder 
+and -> five -> or -> six -> balls  -> this -> second -> attempt -> succeeded -> all -> the -> balls -> took -> effect 
+and -> tore -> one -> side -> open 
+and -> brought -> it -> down 
+}
+}
